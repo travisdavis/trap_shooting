@@ -1,0 +1,25 @@
+<h1><%= @match_banner %></h1>
+
+<div>
+  <%= link_to 'Season', seasons_path %> &gt;
+  <%= link_to 'Schedule', season_matches_path(:season_id => @match.season_id) %>
+</div><br/>
+
+<div id="results">
+  <div id="first_team">
+    <%= render(
+      :partial => 'team_results',
+      :locals => {
+        :team_results => @first_team_results,
+        :team_total => @first_team_total
+    }) %>
+  </div>
+  <div id="second_team">
+    <%= render(
+      :partial => 'team_results',
+      :locals => {
+        :team_results => @second_team_results,
+        :team_total => @second_team_total
+    }) %>
+  </div>
+</div>

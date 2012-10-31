@@ -1,0 +1,31 @@
+// Place all the styles related to the Results controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#results {
+  margin: 0 0 10px 0;
+  clear: right;
+
+  #first_team, #second_team {
+  	float: left;
+    width: 49%;
+
+    table {
+      width: 100%;
+    }
+  }
+
+  #second_team {
+  	margin-left: 10px;
+  }
+}
+.shooter_name {
+  white-space: nowrap;
+  a:link {
+    text-decoration: none;
+    color: #000;
+  }
+}
+.handicap, .scratch, .handicap_birds, .next_handicap_birds, .total_hit {
+  text-align: right;
+}

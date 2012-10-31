@@ -1,0 +1,15 @@
+    <table class="table table-condensed">
+      <tr>
+        <th>Actions</th>
+        <th>Shooter</th>
+        <th>Handicap</th>
+        <th>Scratch</th>
+        <th>Total</th>
+        <th>Next Handicap</th>
+      </tr>
+      <%= render(:partial => 'shooter', :locals => {:team_results => team_results}) %>
+      <tr>
+        <td class="team_total" colspan="6" align="right">Total: <%= team_total %></td>
+      </tr>
+    </table>
+    <% reset_cycle("row_class") %>

@@ -1,0 +1,16 @@
+<%= form_for @shooter do |f| %>
+  <%= f.hidden_field :team_id %>
+
+  <label class="team_label"><%= f.label :casper %></label>
+  <%= f.check_box :casper %><br />
+  <label class="team_label"><%= f.label :position %></label>
+  <%= f.number_field :position %><br />
+  <label class="team_label"><%= f.label :name %></label>
+  <%= f.text_field :name, :size => 64 %><br />
+  <label class="team_label"><%= f.label :handicap_yardage %></label>
+  <%= f.number_field :handicap_yardage %><br />
+  <label class="team_label"><%= f.label :description %></label>
+  <%= f.text_area :description, :cols => 47, :rows => 20 %><br />
+
+  <%= f.submit :id => "commit" %>
+<% end %>

@@ -1,0 +1,61 @@
+<h1 class="header"><%= @season.name%> Teams</h1>
+
+<div><%= link_to 'Seasons', seasons_path %></div><br/>
+
+<div id="teams">
+<% if @teams.count == 0 %>
+  <div id="no_items_message">Add a team using the form below.</div>
+<% else %>
+
+  <table class="table table-condensed">
+    <tr>
+      <th>Actions</th>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Shooters</th>
+      <th>Clean up week number</th>
+    </tr>
+  <% @teams.each do |team| %>
+    <tr id="team_<%= team.id%>" class='<%= cycle('list_line_odd', 'list_line_even')%>'>
+      <td>
+        <% if @season.matches.count == 0 %>
+        <%= link_to 'Delete', team, :method => 'delete', :confirm => 'Are you sure you want to delete this team?' %> |
+        <% end %>
+        <%= link_to 'Edit', edit_team_path(team) %>
+      </td>
+      <td><%= team.name %></td>
+      <td><%= team.number %></td>
+      <td>has <%= link_to team.shooters.count, team_shooters_path(team) %> shooter(s)</td>
+      <td><%= team.clean_up_week_number %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+</div>
+
+<% if @season.matches.count == 0 %>
+<div id="create_form" style="display: none;">
+  <%= render 'form' %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#create_form").hide();
+    $("h1.header").html($("h1.header").html()+" <a href='#' id='add_item_link'>add</a>");
+    $("#create_form form").html($("#create_form form").html()+" <button id='cancel'>Cancel</button>");
+
+    $("#add_item_link").click(function() {
+      $("#teams").hide();
+      $("#create_form").show();
+      $(this).hide();
+    });
+    $("#cancel").click(function(event) {
+      event.preventDefault();
+      $("#teams").show();
+      $("#create_form").hide();
+      $("#add_item_link").show();
+    });
+    $("#no_items_message").html("Click <b>add</b> above to add teams.");
+  });
+</script>
+<% end %>

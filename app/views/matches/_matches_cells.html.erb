@@ -1,0 +1,9 @@
+<% matches.each do |field_matchs| %>
+  <td>
+    <% field_matchs.each do |match| %>
+    <div id="<%= "match_#{match["id"]}" %>">
+      <%= link_to match["display_text"], match_results_path(:match_id => match["id"]) %>
+    </div>
+    <% end %>
+  </td>
+<% end %>

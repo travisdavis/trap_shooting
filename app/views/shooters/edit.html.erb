@@ -1,0 +1,9 @@
+<h1>Edit Shooter</h1>
+
+<div>
+  <%= link_to 'Seasons', seasons_path %> &gt;
+  <%= link_to 'Teams', season_teams_path(:season_id => @team.season_id) %> &gt;
+  <%= link_to 'Shooters', team_shooters_path(:team_id => @shooter.team_id)%>
+</div><br/>
+
+<%= render 'form' %>

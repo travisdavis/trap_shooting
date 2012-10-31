@@ -1,0 +1,12 @@
+<%= form_for @result do |f| %>
+  <%= f.hidden_field :match_id %>
+  <%= f.hidden_field :shooter_id %>
+  <label class="season_label"><%= f.label :is_blind_score %></label>
+  <%= f.check_box :is_blind_score %><br />
+  <label class="season_label"><%= f.label :sixteen_yards %></label>
+  <%= f.number_field :sixteen_yards, :in => 0..25 %><br />
+  <label class="season_label"><%= f.label :handicap %></label>
+  <%= f.number_field :handicap, :in => 0..25 %><br />
+
+  <%= f.submit %>
+<% end %>

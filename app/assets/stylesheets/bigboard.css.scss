@@ -1,0 +1,31 @@
+// Place all the styles related to the bigboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#bigboards {
+  margin: 0 0 10px 0;
+
+  table {
+    width: 100%;
+  }
+}
+
+#bigboard {
+  tr {
+    line-height: 17px;
+  }
+  .team {
+    background-color: #efefef;
+    font-weight: bold;
+  }
+  .name {
+    white-space: nowrap;
+  }
+  .first_team, .vs, .second_team,
+  .handicap_birds, .scratch, .scratch_plus_handicap,
+  .match_outcome, .team_points_so_far, .team_scratch_plus_handicap {
+    width: 25px;
+    text-align: right;
+    padding: 3px;
+  }
+}

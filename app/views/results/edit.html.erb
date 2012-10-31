@@ -1,0 +1,9 @@
+<h1>Edit Result for <%= @shooter.name %> week <%= @match.week_number %></h1>
+
+<div>
+  <%= link_to 'Seasons', seasons_path %> &gt;
+  <%= link_to 'Schedule', season_matches_path(:season_id => @match.season_id) %> &gt;
+  <%= link_to 'Results', match_results_path(:match_id => @match.id) %>
+</div><br/>
+
+<%= render 'form' %>

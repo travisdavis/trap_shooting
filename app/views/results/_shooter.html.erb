@@ -1,0 +1,20 @@
+<% team_results.each do |shooter| %>
+  <tr id="<%= "shooter_#{shooter.id}" %>">
+    <% if shooter.has_results %>
+      <td class="actions">
+        <%= link_to 'Edit', edit_result_path(Result.where(:match_id => @match.id, :shooter_id => shooter.id).first.id), :id => "edit_results_for_shooter_#{shooter.id}" %>
+      </td>
+    <% else %>
+      <td class="actions"><%= link_to 'Add results', new_match_result_path(:shooter_id => shooter.id), :id => "add_results_for_shooter_#{shooter.id}" %></td>
+    <% end %>
+      <td <% if !shooter.has_results %>colspan="6"<% end %> class="shooter_name">
+        <%= link_to shooter.name, edit_shooter_path(shooter.id) %>
+      </td>
+    <% if shooter.has_results %>
+      <td class="handicap_birds"><%= shooter.handicap_birds %></td>
+      <td class="scratch"><%= shooter.scratch %></td>
+      <td class="total_hit"><%= shooter.total %></td>
+      <td class="next_handicap_birds"><%= shooter.next_handicap_birds %></td>
+    <% end %>
+  </tr>
+<% end %>

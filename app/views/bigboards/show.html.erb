@@ -1,0 +1,44 @@
+<h1><%= @season.name %></h1>
+
+<div><%= link_to 'Seasons', seasons_path %></div><br/>
+
+<table id="bigboard" class="table table-bordered">
+<% @big_board.get_teams.each do |team| %>
+  <tr id="team_<%= team.id %>" class="team">
+    <td>Team <%= team.number %></td>
+    <% team.get_weeks.each do |week| %>
+      <td class="first_team"><%= week.first_team %></td>
+      <td class="vs">vs</td>
+      <td class="second_team"><%= week.second_team%></td>
+    <% end %>
+  </tr>
+
+  <% team.get_shooters.each do |shooter| %>
+    <tr id="shooter_<%= shooter.id %>">
+      <td class="name"><%= shooter.name %></td>
+      <% shooter.get_shooter_results.each do |shooter_results| %>
+        <td class="handicap_birds"><%= shooter_results.handicap_birds.to_s %></td>
+        <td class="scratch"><%= shooter_results.scratch.to_s %></td>
+        <td class="scratch_plus_handicap">
+          <% if shooter_results.is_blind_score %>
+          <div class="blind">
+          <% end %>
+          <%= shooter_results.total.to_s %>
+          <% if shooter_results.is_blind_score %>
+          </div>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+
+  <tr>
+    <td>&nbsp;</td>
+    <% team.get_weeks.each do |week| %>
+      <td class="match_outcome"><%= week.outcome %></td>
+      <td class="team_points_so_far"><%= week.points_so_far.to_s %></td>
+      <td class="team_scratch_plus_handicap"><%= week.team_scratch_plus_handicap.to_s %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>

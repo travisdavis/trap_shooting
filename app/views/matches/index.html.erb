@@ -1,0 +1,35 @@
+<h1><%= @season.name %> matches</h1>
+
+<div><%= link_to 'Seasons', seasons_path %></div><br/>
+
+<div id="matches">
+<% if @season.matches.count == 0 %>
+  <%= form_tag(season_matches_path, :method => :create) do -%>
+    <%= hidden_field_tag 'season_id', @season.id %>
+    <div>Add matches by clicking ==>> <%= submit_tag "Create schedule" %></div>
+    <div>Add matches by clicking ==>> <%= submit_tag "Create standard schedule" %></div>
+  <% end %>
+<% else %>
+  <table class="table table-condensed">
+    <tr>
+      <th>Week</th>
+      <th>Date</th>
+      <th>Time</th>
+      <%= render(:partial => 'houses', :locals => {:houses => @season.houses}) %>
+    </tr>
+    <% @schedule.each do |week| %>
+    <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
+      <td class="week_number"><%= week["week_number"] %></td>
+      <td class="week_date"><%= week["date"] %></td>
+      <td class="week_time">
+        <%= render(:partial => 'time_cell', :locals => {:times => week["times"]}) %>
+      </td>
+      <%= render(:partial => 'matches_cells', :locals => {:matches => week["matches"]}) %>
+    </tr>
+    <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
+      <td colspan="7">&nbsp;</td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+</div>

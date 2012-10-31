@@ -1,0 +1,8 @@
+<h1>Edit Team</h1>
+
+<div>
+  <%= link_to 'Seasons', seasons_path %> &gt;
+  <%= link_to 'Teams', season_teams_path(:season_id => @team.season_id) %>
+</div><br/>
+
+<%= render 'form' %>
