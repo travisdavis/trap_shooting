@@ -10,7 +10,7 @@ gem 'omniauth-google'
 gem 'omniauth-yahoo'
 #gem 'omniauth-aol'
 gem 'omniauth-openid'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,6 +18,9 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'therubyracer'
+  gem 'less-rails'
+  gem 'less-rails-bootstrap'
 end
 
 gem 'jquery-rails'
