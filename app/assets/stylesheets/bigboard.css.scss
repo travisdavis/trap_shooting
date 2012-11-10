@@ -12,6 +12,8 @@
 
 #bigboard {
   border-collapse: collapse;
+  overflow: scroll;
+
   tr {
     line-height: 17px;
   }
