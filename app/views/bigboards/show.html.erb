@@ -17,17 +17,21 @@
     <tr id="shooter_<%= shooter.id %>">
       <td class="name"><%= shooter.name %></td>
       <% shooter.get_shooter_results.each do |shooter_results| %>
-        <td class="handicap_birds"><%= shooter_results.handicap_birds.to_s %></td>
-        <td class="scratch"><%= shooter_results.scratch.to_s %></td>
-        <td class="scratch_plus_handicap">
-          <% if shooter_results.is_blind_score %>
-          <div class="blind">
-          <% end %>
-          <%= shooter_results.total.to_s %>
-          <% if shooter_results.is_blind_score %>
-          </div>
-          <% end %>
-        </td>
+        <% if shooter_results.nil? %>
+          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+        <% else %>
+          <td class="handicap_birds"><%= shooter_results.handicap_birds.to_s %></td>
+          <td class="scratch"><%= shooter_results.scratch.to_s %></td>
+          <td class="scratch_plus_handicap">
+            <% if shooter_results.is_blind_score %>
+            <div class="blind">
+            <% end %>
+            <%= shooter_results.total.to_s %>
+            <% if shooter_results.is_blind_score %>
+            </div>
+            <% end %>
+          </td>
+        <% end %>
       <% end %>
     </tr>
   <% end %>

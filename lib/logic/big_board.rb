@@ -152,7 +152,9 @@ module Logic
         if is_blind_score
           nil
         else
-          self.sixteen_yards+self.handicap
+          sixteen_yards = self.sixteen_yards.nil? ? 0 : self.sixteen_yards
+          handicap = self.handicap.nil? ? 0 : self.handicap
+          sixteen_yards+handicap
         end
       end
     end
