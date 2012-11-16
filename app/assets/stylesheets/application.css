@@ -80,22 +80,14 @@ footer {
   margin: 0 20px 0 5px;
 }
 
-.list_line_odd {
-  background-color: #efefef;
-  clear: both;
-}
-.list_line_even {
-  clear: both;
-}
-
 .blind {
   border: 1px solid;
   border-radius: 15px;
   text-align: center;
 }
-
 .row {
   margin:0;
-  padding-top:40px;
-  overflow: scroll;
+}
+.container h1 {
+  margin-top: 40px;
 }
