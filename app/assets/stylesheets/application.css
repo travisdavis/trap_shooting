@@ -49,6 +49,10 @@ footer {
   clear: both;
 }
 
+select {
+  width: auto !important;
+}
+
 #no_items_message {
   padding: 2px;
 }

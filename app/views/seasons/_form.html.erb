@@ -1,16 +1,18 @@
 <%= form_for @season do |f| %>
-  <label class="season_label"><%= f.label :name %></label>
-  <%= f.text_field :name, :size => 64 %><br />
-  <label class="season_label"><%= f.label :start_date %></label>
-  <%= f.datetime_select :start_date %><br />
-  <label class="season_label"><%= f.label :houses %></label>
-  <%= f.number_field :houses, :in => 1..20 %><br />
-  <label class="season_label"><%= f.label :time_slots %></label>
-  <%= f.number_field :time_slots, :in => 1..24 %><br />
-  <label class="season_label"><%= f.label :handicap_calculation %></label>
-  <%= f.text_field :handicap_calculation, :size => 64 %><br />
-  <label class="season_label"><%= f.label :description %></label>
-  <%= f.text_area :description, :cols => 47, :rows => 20 %><br />
+  <div class="span12">
+    <div class="row">
+      <div class="span5">
+        <%= f.label :name %><%= f.text_field :name, :size => 64 %><br />
+        <%= f.label :start_date %><%= f.datetime_select :start_date %><br />
+        <%= f.label :houses %><%= f.number_field :houses, :in => 1..20 %><br />
+        <%= f.label :time_slots %><%= f.number_field :time_slots, :in => 1..24 %><br />
+        <%= f.label :handicap_calculation %><%= f.text_field :handicap_calculation, :size => 64 %><br />
+      </div>
+      <div class="span5">
+        <%= f.label :description %><%= f.text_area :description, :cols => 100, :rows => 13 %><br />
 
-  <%= f.submit :id => "commit" %>
+        <%= f.submit :id => "commit" %>
+      </div>
+    </div>
+  </div>
 <% end %>
