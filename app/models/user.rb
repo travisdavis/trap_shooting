@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
   has_many :seasons, :dependent => :destroy
   validates_associated :seasons
 
-  attr_accessible :name, :email
+  attr_accessible :name, :email, :provider, :uid
 end

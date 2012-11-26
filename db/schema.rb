@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626044244) do
+ActiveRecord::Schema.define(:version => 20121120053217) do
 
   create_table "matches", :force => true do |t|
     t.integer  "season_id"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20120626044244) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "provider"
+    t.string   "uid"
   end
 
 end
