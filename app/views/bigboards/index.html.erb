@@ -7,7 +7,7 @@
 <% if @seasons.count == 0 %>
   <div id="no_items_message">Add a season using the <%= link_to 'season', seasons_path  %> page.</div>
 <% else %>
-  <table>
+  <table class="table table-condensed">
     <tr>
       <th>Season</th>
       <th>Big Board</th>

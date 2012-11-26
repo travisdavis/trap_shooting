@@ -85,36 +85,48 @@ module Logic
         week_date = Date.parse(self.start_date.to_s)+(7*(week_number-1))
         week_matches = self.matches.scoped_by_week_number week_number
 
-        week = {}
-        week["week_number"] = week_number
-        week["date_raw"] = week_date
-        week["date"] = "#{week_date.month}-#{week_date.day}-#{week_date.year}"
-        week["times"] = ["6:00 pm"]
+        schedule.push Week_info.new week_number, week_date, self.time_slots, week_matches, self.houses
+      end
 
-        if self.time_slots > 1
+      schedule
+    end
+
+    class Week_info
+      attr_accessor :week_number, :date_raw, :date, :times, :matches
+
+      def initialize(week_number, week_date, time_slots, week_matches, houses)
+        self.week_number = week_number
+        self.date_raw = week_date
+        self.date = "#{week_date.month}-#{week_date.day}-#{week_date.year}"
+        self.times = ["6:00 pm"]
+        if time_slots > 1
           # add another hour to 'times' if
-          week["times"].push "7:00 pm"
+          self.times.push "7:00 pm"
         end
-        week["matches"] = []
+
+        self.matches = []
 
         for index in (0..week_matches.count-1)
           match = week_matches[index]
           if !match.nil?
-            schedule_match = {}
-            schedule_match["id"] = match.id
-            schedule_match["display_text"] = match.get_text_for_schedule
+            schedule_match = Schedule_match_info.new match
 
-            if !week["matches"][index%self.houses].kind_of?(Array)
-              week["matches"][index%self.houses] = []
+            if !self.matches[index%houses].kind_of?(Array)
+              self.matches[index%houses] = []
             end
-            week["matches"][index%self.houses].push schedule_match
+            self.matches[index%houses].push schedule_match
           end
         end
-
-        schedule.push week
       end
+    end
 
-      schedule
+    class Schedule_match_info
+      attr_accessor :id, :display_text
+
+      def initialize(match)
+        self.id = match.id
+        self.display_text = match.get_text_for_schedule
+      end
     end
   end
 end

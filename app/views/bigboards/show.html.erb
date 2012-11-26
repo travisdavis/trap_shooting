@@ -23,13 +23,13 @@
           <td class="handicap_birds"><%= shooter_results.handicap_birds.to_s %></td>
           <td class="scratch"><%= shooter_results.scratch.to_s %></td>
           <td class="scratch_plus_handicap">
-            <% if shooter_results.is_blind_score %>
+          <% if shooter_results.is_blind_score %>
             <div class="blind">
-            <% end %>
+          <% end %>
             <%= shooter_results.total.to_s %>
-            <% if shooter_results.is_blind_score %>
+          <% if shooter_results.is_blind_score %>
             </div>
-            <% end %>
+          <% end %>
           </td>
         <% end %>
       <% end %>

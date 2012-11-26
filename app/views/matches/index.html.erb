@@ -19,12 +19,12 @@
     </tr>
     <% @schedule.each do |week| %>
     <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
-      <td class="week_number"><%= week["week_number"] %></td>
-      <td class="week_date"><%= week["date"] %></td>
+      <td class="week_number"><%= week.week_number %></td>
+      <td class="week_date"><%= week.date %></td>
       <td class="week_time">
-        <%= render(:partial => 'time_cell', :locals => {:times => week["times"]}) %>
+        <%= render(:partial => 'time_cell', :locals => {:times => week.times}) %>
       </td>
-      <%= render(:partial => 'matches_cells', :locals => {:matches => week["matches"]}) %>
+      <%= render(:partial => 'matches_cells', :locals => {:matches => week.matches}) %>
     </tr>
     <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
       <td colspan="7">&nbsp;</td>
