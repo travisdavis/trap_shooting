@@ -1,7 +1,9 @@
+<% if !user_signed_in? %>
+  <div>You must be signed in to Create seasons</div>
+<% else %>
 <h1 class="header">Seasons</h1>
 
 <div id="seasons">
-
 <% if @seasons.count == 0 %>
   <div id="no_items_message">Add a season using the form below.</div>
 <% else %>
@@ -62,3 +64,4 @@
     $("#no_items_message").html("Click <b>add</b> above to add seasons.");
   });
 </script>
+<% end %>

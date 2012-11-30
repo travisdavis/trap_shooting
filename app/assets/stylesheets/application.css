@@ -90,8 +90,5 @@ select {
   text-align: center;
 }
 .row {
-  margin:0;
-}
-.container h1 {
   margin-top: 40px;
 }

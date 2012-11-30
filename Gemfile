@@ -4,13 +4,11 @@ gem 'rails'
 gem 'pg'
 gem 'thin'
 gem 'rb-fsevent'
-#gem 'omniauth'
-#gem 'omniauth-facebook'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 #gem 'omniauth-google'
-#gem 'omniauth-yahoo'
-#gem 'omniauth-aol'
-#gem 'omniauth-openid'
-#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+#gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

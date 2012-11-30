@@ -1,12 +1,12 @@
 class SeasonsController < ApplicationController
   def index
     @season = Season.new #if there is an error on the page this will not repopulate the form
-    @seasons = Season.all
+    @seasons = current_user.seasons
   end
 
   def create
-    season = Season.new
-    
+    season = current_user.seasons.new
+
     if season.update_attributes params[:season]
       redirect_to :back, :notice => 'Season Created.'
     else
