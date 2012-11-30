@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
 
   before_filter :reload_libs if Rails.env.development?
+  before_filter :require_login
 
   private
     def reload_libs
@@ -19,10 +20,10 @@ class ApplicationController < ActionController::Base
       return 1 if current_user
     end
 
-    def authenticate_user!
-      if !current_user
+    def require_login
+      unless current_user
         flash[:error] = 'You need to sign in before accessing this page!'
-        redirect_to signin_services_path
+        redirect_to :root
       end
     end
 end
