@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-  belongs_to :season
+  belongs_to :season, touch: true
   has_many :results, :dependent => :destroy
 
   attr_accessible :season_id, :week_number, :first_team, :second_team, :slot, :outcome

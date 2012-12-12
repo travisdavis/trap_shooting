@@ -1,0 +1,23 @@
+<table class="table table-condensed">
+  <tr>
+    <th>Actions</th>
+    <th>Name</th>
+    <th>Position</th>
+    <th>Handicap Yardage</th>
+  </tr>
+  <% shooters.each do |shooter| %>
+    <% cache shooter do %>
+      <tr id="shooter_<%=shooter.id%>" class='<%= cycle('list_line_odd', 'list_line_even')%>'>
+        <td class="actions">
+          <% if shooter.season.matches.count == 0 %>
+          <%= link_to 'Delete', shooter, :method => 'delete', :confirm => 'Are you sure you want to delete this shooter?' %> |
+          <% end %>
+          <%= link_to 'Edit', edit_shooter_path(shooter) %>
+        </td>
+        <td><%= shooter.name %></td>
+        <td><%= shooter.position %></td>
+        <td><%= shooter.casper == true ? 'n/a' : shooter.handicap_yardage %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

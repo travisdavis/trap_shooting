@@ -1,6 +1,8 @@
 class Season < ActiveRecord::Base
   include Logic::Schedule
 
+  belongs_to :user, touch: true
+
   has_many :teams, :dependent => :destroy
   validates_associated :teams
 

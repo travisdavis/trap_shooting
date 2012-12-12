@@ -1,5 +1,5 @@
 class Result < ActiveRecord::Base
-  belongs_to :match
+  belongs_to :match, touch: true
   has_one :shooter
   has_one :season, :through => :match
 

@@ -1,5 +1,5 @@
 class Shooter < ActiveRecord::Base
-  belongs_to :team
+  belongs_to :team, touch: true
   has_many :results, :dependent => :destroy
   has_many :matches, :through => :results
   has_one :season, :through => :team

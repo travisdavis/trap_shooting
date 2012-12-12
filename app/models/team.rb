@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  belongs_to :season
+  belongs_to :season, touch: true
   has_many :shooters, :dependent => :destroy
   validates_associated :shooters
 

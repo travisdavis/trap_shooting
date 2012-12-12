@@ -8,16 +8,12 @@
 
 User.delete_all
 
+puts "Create a user"
 user = User.create(
   :name => "Travis Davis",
-  :email => "travis.davis@gmail.com"
-)
-
-user.services.create(
-  :provider => "facebook",
-  :uid => "1357525168",
-  :uname => "Travis Davis",
-  :uemail => "travis.davis@gmail.com"
+  :email => "travis.davis@gmail.com",
+  :provider => "twitter",
+  :uid => 14058214
 )
 
 season_1 = user.seasons.create(
