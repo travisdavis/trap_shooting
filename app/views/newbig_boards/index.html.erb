@@ -1,0 +1,25 @@
+<h1 class="header">Big boards</h1>
+
+<div><%= link_to 'Seasons', seasons_path %></div><br/>
+
+<div id="bigboards">
+
+<% if @seasons.count == 0 %>
+  <div id="no_items_message">Add a season using the <%= link_to 'season', seasons_path  %> page.</div>
+<% else %>
+  <table class="table table-condensed">
+    <tr>
+      <th>Season</th>
+      <th>Big Board</th>
+    </tr>
+
+    <% @seasons.each do |season| %>
+    <tr id="season_<%= season.id%>" class='<%= cycle('list_line_odd', 'list_line_even')%>'>
+      <td><%= season.name %></td>
+      <td><%= link_to 'View Big Board', newbig_board_path(season.id) %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+
+</div>

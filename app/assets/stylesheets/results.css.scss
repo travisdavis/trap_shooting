@@ -12,20 +12,24 @@
 
     table {
       width: 100%;
+      td.handicap_birds, td.scratch, td.total_hit, td.next_handicap_birds,
+      th.handicap_birds, th.scratch, th.total_hit, th.next_handicap_birds {
+        text-align: right;
+      }
+      td.team_total {
+        text-align: right;
+      }
+      td.shooter_name {
+        white-space: nowrap;
+        a:link, a:visited {
+          text-decoration: none;
+          color: #000;
+        }
+      }
     }
   }
 
   #second_team {
   	margin-left: 10px;
   }
-}
-.shooter_name {
-  white-space: nowrap;
-  a:link {
-    text-decoration: none;
-    color: #000;
-  }
-}
-.handicap, .scratch, .handicap_birds, .next_handicap_birds, .total_hit {
-  text-align: right;
 }

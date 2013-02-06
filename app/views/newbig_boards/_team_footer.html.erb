@@ -1,0 +1,6 @@
+<tr>
+	<td>&nbsp;</td>
+	<% team.get_schedule.each do |match| %>
+		<%= render 'match_result', :match => match, :team => team %>
+	<% end %>
+</tr>

@@ -1,0 +1,5 @@
+<%= render 'team_header', :team => team %>
+<% team.shooters.each do |shooter| %>
+	<%= render 'shooter', :shooter => shooter %>
+<% end %>
+<%= render 'team_footer', :team => team %>

@@ -12,6 +12,7 @@
 <% else %>
   <table class="table table-condensed">
     <tr>
+      <th>Actions</th>
       <th>Week</th>
       <th>Date</th>
       <th>Time</th>
@@ -19,6 +20,7 @@
     </tr>
     <% @schedule.each do |week| %>
     <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
+      <td>Add button here</td>
       <td class="week_number"><%= week.week_number %></td>
       <td class="week_date"><%= week.date %></td>
       <td class="week_time">

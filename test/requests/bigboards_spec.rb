@@ -118,7 +118,7 @@ describe "Bigboards" do
         team_dom.should have_content "Team "+team.number.to_s
 
         # Should display team's schedule "x vs y"
-        for match in @season1.get_schedule_for_team team.number
+        for match in team.get_schedule
           team_dom.should have_content "#{match.first_team} vs #{match.second_team}"
         end
 
@@ -128,7 +128,7 @@ describe "Bigboards" do
           shooter_dom = find("#shooter_#{shooter.id}")
           shooter_dom.should have_content "Shooter "+shooter.position.to_s
 
-          for match in @season1.get_schedule_for_team team.number
+          for match in team.get_schedule
             result = Result.find_by_shooter_id shooter.id
             # handicap
 

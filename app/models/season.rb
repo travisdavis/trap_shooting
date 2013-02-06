@@ -3,7 +3,7 @@ class Season < ActiveRecord::Base
 
   belongs_to :user, touch: true
 
-  has_many :teams, :dependent => :destroy
+  has_many :teams, :dependent => :destroy, :order => 'number ASC'
   validates_associated :teams
 
   has_many :matches, :dependent => :destroy
@@ -24,10 +24,5 @@ class Season < ActiveRecord::Base
   def get_matches_by_week(week_number)
     self.matches.where(:week_number => week_number)
   end
-
-  def get_schedule_for_team team_number
-    self.matches.order(:week_number, :id).find(:all, :conditions => ["first_team = :team_number OR second_team = :team_number", { :team_number => team_number }])
-  end
-
   ## end functions ##
 end

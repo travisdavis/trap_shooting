@@ -9,4 +9,10 @@
   <%= f.number_field :handicap, :in => 0..25 %><br />
 
   <%= f.submit %>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#result_sixteen_yards').focus();
+    });
+  </script>
 <% end %>

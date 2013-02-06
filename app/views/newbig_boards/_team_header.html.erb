@@ -1,0 +1,6 @@
+<tr id="team_<%=team.number%>" class="team_header">
+	<td class="team_name"><%=team.name%></td>
+	<% team.get_schedule.each do |match| %>
+		<%= render 'match', :match => match %>
+	<% end %>
+</tr>

@@ -1,0 +1,6 @@
+<tr class="shooter">
+	<td class="shooter_name"><%= shooter.name %></td>
+	<% shooter.results.each do |result| %>
+		<%= render 'shooter_result', :shooter_results => get_shooter_result_info(shooter, result) %>
+	<% end %>
+</tr>

@@ -1,0 +1,12 @@
+
+<h1 class="header"><%= @season.name %></h1>
+
+<div><%= link_to 'Seasons', seasons_path %></div><br/>
+
+<div class="scrollable_container">
+	<table id="new_bigboard" class="table-bordered">
+		<% @season.teams.each do |team| %>
+			<%= render 'team', :team => team %>
+		<% end %>
+	</table>
+</div>

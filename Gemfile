@@ -7,6 +7,7 @@ gem 'rb-fsevent'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-yahoo'
 #gem 'omniauth-google'
 #gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 

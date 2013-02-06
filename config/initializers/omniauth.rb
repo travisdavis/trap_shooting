@@ -7,4 +7,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   #provider :google_oauth2, ENV['739780853210.apps.googleusercontent.com'], ENV['Vmsz615rLXrbaksnJgsdoblQ'], {access_type: 'online', approval_prompt: ''}
   #provider :linked_in, 'CONSUMER_KEY', 'CONSUMER_SECRET'
   provider :twitter, 'UxT6DOCbPCuE87yqKRfwNA', 'm2Tx1fp4CwgU3OooBCiT9FiPtHYPl6lq8VTFiZ9y68o'
+  provider :yahoo, 'dj0yJmk9MXdVODlEYlg2ZW1RJmQ9WVdrOVpsVkpOVWhzTldjbWNHbzlPRGswT1RZek9EWXkmcz1jb25zdW1lcnNlY3JldCZ4PTIw', '25e251335f16a3fba29c81a1559953f0ce8545bd'
 end

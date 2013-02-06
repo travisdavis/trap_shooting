@@ -19,6 +19,7 @@ TrapShooting::Application.routes.draw do
   resources :results
 
   resources :bigboards, :only => [:index, :show]
+  resources :newbig_boards, :only => [:index, :show]
 
   # authentication routes
   match "/auth/:provider/callback", to: "sessions#create"

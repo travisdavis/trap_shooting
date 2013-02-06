@@ -2,14 +2,15 @@
       <tr>
         <th>Actions</th>
         <th>Shooter</th>
-        <th>Handicap</th>
-        <th>Scratch</th>
-        <th>Total</th>
-        <th>Next Handicap</th>
+        <th class="handicap_birds">Handicap</th>
+        <th class="scratch">Scratch</th>
+        <th class="total_hit">Total</th>
+        <th class="next_handicap_birds">Next Handicap</th>
       </tr>
       <%= render(:partial => 'shooter', :locals => {:team_results => team_results}) %>
       <tr>
-        <td class="team_total" colspan="6" align="right">Total: <%= team_total %></td>
+        <td class="team_total" colspan="5" align="right">Total: <%= team_total %></td>
+        <td>&nbsp;</td>
       </tr>
     </table>
     <% reset_cycle("row_class") %>

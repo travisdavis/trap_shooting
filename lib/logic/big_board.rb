@@ -42,7 +42,7 @@ module Logic
         # initialize week_info
         weeks = []
         points_so_far = 0
-        @team.season.get_schedule_for_team(@team.number).each do |match|
+        @team.get_schedule.each do |match|
           week = Week_info.new(@team)
           week.outcome = match.get_text_for_big_board @team.number
 

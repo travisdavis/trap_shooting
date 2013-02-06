@@ -1,7 +1,7 @@
 class Match < ActiveRecord::Base
   belongs_to :season, touch: true
   has_many :results, :dependent => :destroy
-
+  
   attr_accessible :season_id, :week_number, :first_team, :second_team, :slot, :outcome
 
   ## validations ##
@@ -39,12 +39,14 @@ class Match < ActiveRecord::Base
           match_text = "W"
         end
       else
-        match_text = ""
+        match_text = "N/A"
     end
     match_text
   end
 
   def get_points_for_match team_number
+    # default to zero points
+    match_points = 0
     case self.outcome
       when OUTCOME_TIE
         match_points = 1
