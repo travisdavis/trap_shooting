@@ -1,25 +1,27 @@
 <h1><%= @season.name %> matches</h1>
 
-<div><%= link_to 'Seasons', seasons_path %></div><br/>
+<div><%= user_signed_in? ? link_to('Seasons', seasons_path) : "" %></div><br/>
 
 <div id="matches">
 <% if @season.matches.count == 0 %>
-  <%= form_tag(season_matches_path, :method => :create) do %>
-    <%= hidden_field_tag 'season_id', @season.id %>
-    <%= hidden_field_tag 'holidays', '' %>
-    
-    <%= label_tag 'Holidays' %>
-    <div id="off_weeks">none</div>
-    <div>
-      <%= label_tag 'holiday', 'Add Holiday'%>
-      <%= text_field_tag 'holiday', '' %>
-      <%= button_tag 'Add Holiday', :id => 'add_holiday' %>
-    </div>
-    <div><%= submit_tag "Create schedule" %>
-    <% if @season.teams.count == 16 %>
-      <%= submit_tag "Create standard schedule" %>
+  <% if user_signed_in? %>
+    <%= form_tag(season_matches_path, :method => :create) do %>
+      <%= hidden_field_tag 'season_id', @season.id %>
+      <%= hidden_field_tag 'holidays', '' %>
+      
+      <%= label_tag 'Holidays' %>
+      <div id="off_weeks">none</div>
+      <div>
+        <%= label_tag 'holiday', 'Add Holiday'%>
+        <%= text_field_tag 'holiday', '' %>
+        <%= button_tag 'Add Holiday', :id => 'add_holiday' %>
+      </div>
+      <div><%= submit_tag "Create schedule" %>
+      <% if @season.teams.count == 16 %>
+        <%= submit_tag "Create standard schedule" %>
+      <% end %>
+      </div>
     <% end %>
-    </div>
   <% end %>
 <% else %>
   <table class="table table-condensed">

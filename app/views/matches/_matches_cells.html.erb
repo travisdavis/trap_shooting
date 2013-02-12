@@ -2,7 +2,11 @@
   <td>
     <% field_matchs.each do |match| %>
     <div id="<%= "match_#{match.id}" %>">
+      <% if user_signed_in? %>
       <%= link_to match.display_text, match_results_path(:match_id => match.id) %>
+      <% else %>
+      <%= match.display_text %>
+      <% end %>
     </div>
     <% end %>
   </td>

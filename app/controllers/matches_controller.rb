@@ -7,6 +7,8 @@ class Array
 end
 
 class MatchesController < ApplicationController
+  skip_before_filter :require_login
+
   def index
     @season = Season.find params[:season_id]
     @schedule = @season.get_schedule

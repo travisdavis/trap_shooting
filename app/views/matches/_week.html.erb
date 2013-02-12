@@ -7,9 +7,17 @@
 </tr>
 <% else %>
 <tr class="<%= @season.is_missed_week(week.week_number) ? 'disabled' : '' %>">
-  <td>
-    <%= link_to @season.is_missed_week(week.week_number) ? "POSTPONED" : "Postpone", season_path(@season, :week_number => week.week_number), :method=> :put %>
-  </td>
+  	<% if @season.is_missed_week(week.week_number) %>
+  	<td>POSTPONED</td>
+  	<% else %>
+		<td>
+		<% if user_signed_in? %>
+		<%= link_to "Postpone", season_path(@season, :week_number => week.week_number), :method=> :put %>
+		<% else %>
+		-
+		<% end %>
+		</td>
+    <% end %>
   <td class="week_number"><%= week.week_number %></td>
   <td class="week_date"><%= week.date %></td>
   <td class="week_time">
