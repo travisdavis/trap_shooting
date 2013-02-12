@@ -79,25 +79,82 @@ module Logic
       create_schedule number_of_teams, true
     end
 
-    def get_schedule
-      schedule = []
-      for week_number in (1..(self.teams.count-1))
-        week_date = Date.parse(self.start_date.to_s)+(7*(week_number-1))
-        week_matches = self.matches.scoped_by_week_number week_number
+    def get_holidays
+      holidays = []
+      self.missed_weeks.where(:reason => 'Holiday').each do |holiday|
+        holidays.push holiday.holiday_date.strftime('%F')
+      end
+      holidays
+    end
 
-        schedule.push Week_info.new week_number, week_date, self.time_slots, week_matches, self.houses
+    def get_next_week_date index
+      next_week_date = Date.parse(self.start_date.to_s)+(7*index)
+      next_week_date_formatted = next_week_date.strftime "%F"
+
+      # is this date already in schedule?
+      if (@schedule_dates.include?(next_week_date_formatted)==true)
+        # yes it is, bump index by 1 and try again
+        return get_next_week_date(index+1)
+      else
+        # no, is it the date a holiday?
+        if (@holidays.include?(next_week_date_formatted)==true)
+          # yes it is, add the holiday to the schedule
+          @schedule_dates.push next_week_date_formatted
+
+          # and bump index by 1 and try again
+          return get_next_week_date(index+1)
+        else
+          # it is a good date, return it
+          return next_week_date_formatted
+        end
+      end
+    end
+
+    def get_schedule
+      @schedule_dates = []
+      @holidays = get_holidays
+
+      # build an array of weeks indexed by date
+      # subract two because zero based and the number of matches is teams-1
+      (0..self.teams.count-2).each do |index|
+        @schedule_dates.push get_next_week_date(index)
+      end
+
+      schedule = []
+      week_number = 1
+      @schedule_dates.each do |schedule_date|
+        next_week = get_a_week schedule_date, week_number
+        schedule.push next_week
+        # only bump the week number if it was not a holiday
+        if !next_week.holiday
+          week_number=week_number+1
+        end
       end
 
       schedule
     end
 
-    class Week_info
-      attr_accessor :week_number, :date_raw, :date, :times, :matches
+    def get_a_week date, week_number
+      week_matches = self.matches.scoped_by_week_number week_number
+      holiday = @holidays.include?(date)
 
-      def initialize(week_number, week_date, time_slots, week_matches, houses)
+      Week_info.new week_number, Date.parse(date), self.time_slots, week_matches, self.houses, holiday
+    end
+
+    def get_week week_number
+      week_date = Date.parse(self.start_date.to_s)+(7*(week_number-1))
+      week_matches = self.matches.scoped_by_week_number week_number
+
+      Week_info.new week_number, week_date, self.time_slots, week_matches, self.houses, false
+    end
+
+    class Week_info
+      attr_accessor :week_number, :times, :matches, :holiday
+
+      def initialize(week_number, week_date, time_slots, week_matches, houses, holiday)
         self.week_number = week_number
-        self.date_raw = week_date
-        self.date = "#{week_date.month}-#{week_date.day}-#{week_date.year}"
+        @date_raw = week_date
+        self.holiday = holiday
         self.times = ["6:00 pm"]
         if time_slots > 1
           # add another hour to 'times' if
@@ -117,6 +174,18 @@ module Logic
             self.matches[index%houses].push schedule_match
           end
         end
+      end
+
+      def date_raw
+        @date_raw
+      end
+
+      def date_raw=(date)
+        @date_raw = date
+      end
+
+      def date
+        return self.date_raw.strftime('%F')
       end
     end
 

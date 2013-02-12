@@ -4,10 +4,22 @@
 
 <div id="matches">
 <% if @season.matches.count == 0 %>
-  <%= form_tag(season_matches_path, :method => :create) do -%>
+  <%= form_tag(season_matches_path, :method => :create) do %>
     <%= hidden_field_tag 'season_id', @season.id %>
-    <div>Add matches by clicking ==>> <%= submit_tag "Create schedule" %></div>
-    <div>Add matches by clicking ==>> <%= submit_tag "Create standard schedule" %></div>
+    <%= hidden_field_tag 'holidays', '' %>
+    
+    <%= label_tag 'Holidays' %>
+    <div id="off_weeks">none</div>
+    <div>
+      <%= label_tag 'holiday', 'Add Holiday'%>
+      <%= text_field_tag 'holiday', '' %>
+      <%= button_tag 'Add Holiday', :id => 'add_holiday' %>
+    </div>
+    <div><%= submit_tag "Create schedule" %>
+    <% if @season.teams.count == 16 %>
+      <%= submit_tag "Create standard schedule" %>
+    <% end %>
+    </div>
   <% end %>
 <% else %>
   <table class="table table-condensed">
@@ -19,19 +31,86 @@
       <%= render(:partial => 'houses', :locals => {:houses => @season.houses}) %>
     </tr>
     <% @schedule.each do |week| %>
-    <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
-      <td>Add button here</td>
-      <td class="week_number"><%= week.week_number %></td>
-      <td class="week_date"><%= week.date %></td>
-      <td class="week_time">
-        <%= render(:partial => 'time_cell', :locals => {:times => week.times}) %>
-      </td>
-      <%= render(:partial => 'matches_cells', :locals => {:matches => week.matches}) %>
-    </tr>
-    <tr class='<%= cycle('list_line_odd', 'list_line_even') %>'>
-      <td colspan="7">&nbsp;</td>
-    </tr>
+    <%= render(:partial => 'week', :locals => {:week => week}) %>
+    <% end %>
+    
+    <% @season.get_missed_weeks.each do |missed_week| %>
+    <%= render(:partial => 'missed_week', :locals => {:week => missed_week}) %>
     <% end %>
   </table>
 <% end %>
+
+  <script type="text/javascript">
+    var date_format = "mm/dd/yy";
+
+    function btn_click_prevent_default() {
+      event.preventDefault();
+      event.returnValue = false;
+      this.onclick = null;
+    }
+    function getRemoveHolidayHtml(id) {
+      return $('<div id="div_'+id+'">'+id+' <button id="'+id+'">Remove</button></div>');
+    }
+
+    $(document).ready(function() {
+      <% if @season.matches.count == 0 %>
+      $('#holiday').datepicker({ dateFormat: date_format });
+      $('#add_holiday').click(function() {
+        btn_click_prevent_default();
+
+        var holiday = $('#holiday');
+        var new_date_raw = holiday.datepicker("getDate");
+
+        if (holiday.datepicker('getDate') == null) {
+          // noop, they did not pick a date
+          alert('You did not pick a date to add.');
+        } else {
+          var new_date_formatted = $.datepicker.formatDate(date_format, new_date_raw);
+          if ($('#off_weeks').text().indexOf(new_date_formatted) >= 0) {
+            // the date is already in the list
+            alert('"'+new_date_formatted+'" has already been added.');
+          } else {
+            if ($('#off_weeks').text() == 'none') {
+              $('#off_weeks').html(getRemoveHolidayHtml(new_date_formatted));
+              $('#holidays').val(new_date_formatted);
+            } else {
+              $('#off_weeks').append(getRemoveHolidayHtml(new_date_formatted));
+              $('#holidays').val($('#holidays').val()+' '+new_date_formatted);
+            }
+
+            // wire up the remove button click handler here
+            $('#'+new_date_formatted).click(function(evt){
+              btn_click_prevent_default();
+
+              // remove the date from #holidays
+              var holidays = $('#holidays').val();
+              if (holidays.indexOf(this.id) >= 0) {
+                var newVal = holidays.replace(this.id, '');  // will deal with empty array items on the server
+                $('#holidays').val(newVal.trim());
+              }
+              // remove the markup
+              $('#div_'+this.id).remove();
+
+              // if #holidays is empty then display 'none'
+              if ($('#off_weeks').html() == "") {
+                $('#off_weeks').text('none');
+              }
+
+              return false;
+            });
+          }
+        }
+
+        return false;
+      });
+      <% else %>
+      // prevent clicks on disabled table rows
+      $("tr.disabled").click(function(event) {
+        btn_click_prevent_default();
+
+        return false;
+      });
+      <% end %>
+    });
+  </script>
 </div>

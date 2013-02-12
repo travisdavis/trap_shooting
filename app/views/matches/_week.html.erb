@@ -1,0 +1,21 @@
+<% if week.holiday %>
+<tr>
+  <td class="holiday">Holiday</td>
+  <td> - </td>
+  <td><%= week.date %></td>
+  <td colspan="5">&nbsp;</td>
+</tr>
+<% else %>
+<tr class="<%= @season.is_missed_week(week.week_number) ? 'disabled' : '' %>">
+  <td>
+    <%= link_to @season.is_missed_week(week.week_number) ? "POSTPONED" : "Postpone", season_path(@season, :week_number => week.week_number), :method=> :put %>
+  </td>
+  <td class="week_number"><%= week.week_number %></td>
+  <td class="week_date"><%= week.date %></td>
+  <td class="week_time">
+    <%= render(:partial => 'time_cell', :locals => {:times => week.times}) %>
+  </td>
+  <%= render(:partial => 'matches_cells', :locals => {:matches => week.matches}) %>
+</tr>
+<% end %>
+<tr><td colspan="8">&nbsp;</td></tr>

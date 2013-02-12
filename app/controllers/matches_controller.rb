@@ -18,6 +18,14 @@ class MatchesController < ApplicationController
     notice_message = "Schedule already exists."
 
     if season.matches.count == 0
+
+      # deal with holidays first
+      params[:holidays].split(" ").each do |holiday|
+        season.missed_weeks.create(
+          :reason => 'Holiday',
+          :holiday_date => Date.strptime(holiday,'%m/%d/%Y'))
+      end
+
       if params[:commit] == "Create standard schedule" && season.teams.count == 16
         schedule = season.create_Type1_schedule
       else

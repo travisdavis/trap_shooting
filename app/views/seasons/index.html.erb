@@ -19,7 +19,7 @@
   $(document).ready(function() {
     $("#create_form").hide();
     $("h1.header").html($("h1.header").html()+" <a href='#' id='add_item_link'>add</a>");
-    $("#create_form form").html($("#create_form form").html()+" <button id='cancel'>Cancel</button>");
+    $("#commit").after(" <button id='cancel'>Cancel</button>");
 
     $("#add_item_link").click(function() {
       $("#seasons").hide();

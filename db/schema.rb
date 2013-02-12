@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120053217) do
+ActiveRecord::Schema.define(:version => 20130211014200) do
 
   create_table "matches", :force => true do |t|
     t.integer  "season_id"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20121120053217) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
     t.integer  "outcome",     :default => -1
+  end
+
+  create_table "missed_weeks", :force => true do |t|
+    t.integer  "season_id"
+    t.integer  "week_number"
+    t.string   "reason"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.date     "holiday_date"
   end
 
   create_table "results", :force => true do |t|

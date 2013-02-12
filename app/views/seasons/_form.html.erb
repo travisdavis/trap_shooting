@@ -1,17 +1,23 @@
 <%= form_for @season do |f| %>
   <div class="span12">
-    <div class="row">
-      <div class="span5">
-        <%= f.label :name %><%= f.text_field :name, :size => 64 %><br />
-        <%= f.label :start_date %><%= f.datetime_select :start_date %><br />
-        <%= f.label :houses %><%= f.number_field :houses, :in => 1..20 %><br />
-        <%= f.label :time_slots %><%= f.number_field :time_slots, :in => 1..24 %><br />
-        <%= f.label :handicap_calculation %><%= f.text_field :handicap_calculation, :size => 64 %><br />
-      </div>
-      <div class="span5">
-        <%= f.label :description %><%= f.text_area :description, :cols => 100, :rows => 13 %><br />
-        <%= f.submit :id => "commit" %>
-      </div>
+    <div class="span5">
+      <%= f.label :name %><%= f.text_field :name, :size => 64, :value => 'new season' %><br />
+      <%= f.label :start_date %><%= f.datetime_select :start_date, :value => '2011-10-12 18:00:00' %><br />
+      <%= f.label :houses %><%= f.number_field :houses, :in => 1..20, :value => '4' %><br />
+      <%= f.label :time_slots %><%= f.number_field :time_slots, :in => 1..24, :value => '2' %><br />
+      <%= f.label :handicap_calculation %><%= f.text_field :handicap_calculation, :size => 64, :value => '0.7' %><br />
+    </div>
+    <div class="span5">
+      <%= f.label :description %><%= f.text_area :description, :cols => 100, :rows => 10, :value => 'new season description' %><br />
+      
+      <% if @season.id.nil? %>
+      <%= label_tag "create_generic_teams_and_shooters", "Also create generic teams & shooters" %>
+      <%= check_box_tag "create_generic_teams_and_shooters" %><br />
+      <%= label_tag "number_of_teams_to_create", "Number of teams to create:" %>
+      <%= number_field_tag "number_of_teams_to_create", nil, :in => 0...17 %><br />
+      <% end %>
+
+      <%= f.submit :id => "commit" %>
     </div>
   </div>
 <% end %>

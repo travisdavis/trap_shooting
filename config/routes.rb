@@ -6,6 +6,8 @@ TrapShooting::Application.routes.draw do
     resources :matches
   end
 
+  resources :matches
+
   resources :teams do
     resources :shooters
   end
